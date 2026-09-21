@@ -16,27 +16,30 @@ menu:
     - name: Home
       url: ""
       weight: 1
-    - name: Books
-      url: "books/"
+    - name: Research
+      url: "research/"
       weight: 2
-    - name: Culture
-      url: "culture/"
+    - name: Team
+      url: "team/"
       weight: 3
-    - name: Curiosity
-      url: "curiosity/"
+    - name: Teaching
+      url: "teaching/"
       weight: 4
-    - name: Ideas
-      url: "ideas/"
+    - name: CV
+      url: "cv/"
       weight: 5
-    - name: Tech
-      url: "tech/"
+    - name: Publications
+      url: "publications/"
       weight: 6
-    - name: Travel
-      url: "travel/"
+    - name: My Travels
+      url: "travels/"
       weight: 7
-    - name: About
-      url: "about/"
+    - name: My Ski
+      url: "ski/"
       weight: 8
+    - name: Badminton
+      url: "badminton/"
+      weight: 9
 
 params:
   footer: "&copy; [Sitesh Pattanaik](https://your-site.netlify.app) {Year}"
