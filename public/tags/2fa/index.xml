@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2fa on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/2fa/</link>
+    <description>Recent content in 2fa on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Nov 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/2fa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Living Ahead of Time: Daylight Savings and Beyond</title>
+      <link>http://localhost:1313/tech/daylight-savings-and-totp/</link>
+      <pubDate>Wed, 27 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/daylight-savings-and-totp/</guid>
+      <description>&lt;p&gt;Once daylight savings ended on November 3, 2024, I wanted to fix my sleep schedule — so I decided not to move back the analog clock in my house. The world is mostly digital though, so I manually adjusted the time on my phone and digital watch to not respect the time change. In other words, my clock was running 1 hour ahead of the true time in my region.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

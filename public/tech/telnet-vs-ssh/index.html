@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Telnet vs SSH | The Global Journal by Sitesh</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/books/">Books</a></li>
+      
+      <li><a href="/culture/">Culture</a></li>
+      
+      <li><a href="/curiosity/">Curiosity</a></li>
+      
+      <li><a href="/ideas/">Ideas</a></li>
+      
+      <li><a href="/tech/">Tech</a></li>
+      
+      <li><a href="/travel/">Travel</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Telnet vs SSH</span></h1>
+
+<h2 class="date">2024/12/15</h2>
+</div>
+
+<main>
+<p>When I was working at a small startup back in the day, there wouldn&rsquo;t always be enough subject matter experts (SMEs) to solve problems due to small dev teams. In most cases, the startup required the engineering manager to be highly technical.</p>
+<p>Back then, we were manually deploying by building the Rust web server on the EC2 instance and restarting the application server for non-prod environments.</p>
+<p>Once, there was an issue where we were not able to SSH into the machine, and my manager quickly joined the call and fired a Telnet command first to check the connectivity. I couldn&rsquo;t understand why he preferred Telnet over SSH — maybe it was just what he was familiar with, I thought.</p>
+<hr>
+<p>Fast forward to today, I was checking a couple of things around DNS resolution and had to use Telnet to check connectivity — and it connected the dots for me.</p>
+<h2 id="what-makes-telnet-useful">What makes Telnet useful?</h2>
+<ul>
+<li>Telnet is a command-line utility, like other tools such as <code>curl</code> or <code>ssh</code></li>
+<li>The best thing about Telnet is that you can <strong>specify the port</strong> to check whether the server responds on it — helping establish the first point of connectivity</li>
+<li>To check if a MySQL server is responsive: <code>telnet root@mysql-server-ip 3306</code></li>
+<li>To check if SSH is reachable: <code>telnet root@server-ip 23</code></li>
+</ul>
+<h2 id="why-not-just-use-curl">Why not just use curl?</h2>
+<p>You might be thinking — we can use <code>curl</code> too, right?</p>
+<p>Not really. Unlike Telnet, curl doesn&rsquo;t have a direct way to make a raw TCP connection request. It works mostly for HTTP/HTTPS, meaning it strictly targets ports 80 or 443. If those ports aren&rsquo;t accessible, you can&rsquo;t clearly tell whether the connectivity is broken or the port is simply inaccessible.</p>
+<p>There are ways to use curl with Telnet — <code>curl telnet://192.168.0.1:8082</code> — but that&rsquo;s more verbose and less intuitive for quick connectivity checks.</p>
+<hr>
+<p>So when my manager fired Telnet before SSH, he wasn&rsquo;t just going with what was familiar. He was checking whether the machine was reachable at all before assuming it was an SSH-specific problem. A small but important distinction when you&rsquo;re debugging under pressure.</p>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://your-site.netlify.app">Sitesh Pattanaik</a> 2026
+  
+  </footer>
+  </body>
+</html>
+

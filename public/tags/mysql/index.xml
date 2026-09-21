@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/mysql/</link>
+    <description>Recent content in Mysql on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding MySQL Server Time Zone Support</title>
+      <link>http://localhost:1313/tech/mysql-timezone-support/</link>
+      <pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/mysql-timezone-support/</guid>
+      <description>&lt;p&gt;MySQL has two column types for storing date and time: &lt;code&gt;DATETIME&lt;/code&gt; and &lt;code&gt;TIMESTAMP&lt;/code&gt;. They look similar on the surface but behave very differently when it comes to timezone handling.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;DATETIME&lt;/code&gt;&lt;/strong&gt; — stores the value as-is, with no timezone conversion on read&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;TIMESTAMP&lt;/code&gt;&lt;/strong&gt; — always stores in UTC internally, converts to system TZ on read&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;when-the-datetime-string-has-timezone-information&#34;&gt;When the Datetime String HAS Timezone Information&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/datetime-having-timezone.webp&#34; alt=&#34;has-timezone!&#34;&gt;&#xA;Take this example: &lt;code&gt;2024-10-22 22:47 -03:00&lt;/code&gt; (Oct 22, 2024 10:47 PM UTC-3)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

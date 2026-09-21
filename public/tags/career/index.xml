@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Career on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/career/</link>
+    <description>Recent content in Career on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/career/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Could This Charlie Munger Strategy Be the Key to Your Next Job?</title>
+      <link>http://localhost:1313/ideas/charlie-munger-job-strategy/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/ideas/charlie-munger-job-strategy/</guid>
+      <description>&lt;p&gt;I was on my way to a friend&amp;rsquo;s place when a junior from my undergrad hit me up after a while. I figured he just wanted to catch up, and before I knew it, we jumped on a call.&lt;/p&gt;&#xA;&lt;p&gt;We chatted about random stuff — beautiful sunsets in Southern California, nothing special. But soon we got to the real reason for the call. He graduated earlier this year and still doesn&amp;rsquo;t have a job.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Engineer&#39;s Dilemma: When to Ask for Help</title>
+      <link>http://localhost:1313/ideas/engineers-dilemma-asking-for-help/</link>
+      <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/ideas/engineers-dilemma-asking-for-help/</guid>
+      <description>&lt;p&gt;There was a day early in my time as a Software Engineer at a new firm, just a couple of months in. Like with most tech companies, the systems, terminologies, projects, and languages were all new to me. Having already gone through a few job switches in my career, I had come to expect this.&lt;/p&gt;&#xA;&lt;p&gt;I was assigned a project and paired with another team member who had more context about the work. We started collaborating asynchronously — initially I worked beside him at his desk for a few days, and things started to click. After that, I decided to work on my own and only reach out if I hit a wall or needed clarification.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How Do You, as a Software Engineer, Protect Your Weekends?</title>
+      <link>http://localhost:1313/ideas/protecting-your-weekends/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/ideas/protecting-your-weekends/</guid>
+      <description>&lt;p&gt;Saving your weekends and getting to do the things you&amp;rsquo;ve always wanted starts long before the clock strikes midnight on Friday.&lt;/p&gt;&#xA;&lt;p&gt;As software engineers — whether working remotely or in-person — we need to be mindful of how we spend our time, especially on Fridays. It&amp;rsquo;s easy to get distracted: a failing build, a known bug that&amp;rsquo;ll take time to fix, being on-call over the weekend, or waiting on a team that&amp;rsquo;s already clocked out. All these little things tempt us to think we have the whole weekend to deal with work, which leads us to binge Netflix or scroll Instagram instead.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

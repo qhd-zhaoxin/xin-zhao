@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Life on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/life/</link>
+    <description>Recent content in Life on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mastering Coffee and Compost: My U.S. Learning Curve</title>
+      <link>http://localhost:1313/culture/mastering-coffee-and-compost/</link>
+      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/culture/mastering-coffee-and-compost/</guid>
+      <description>&lt;p&gt;When I first came to the U.S., the two things that confused me the most were the different types of coffee at Starbucks and how to deal with garbage disposal. Strange, right? Looking back after three years, I still find it a bit funny.&lt;/p&gt;&#xA;&lt;h2 id=&#34;coffee&#34;&gt;Coffee&lt;/h2&gt;&#xA;&lt;p&gt;At Starbucks or similar places, I would be completely overwhelmed by the variety of options on the menu. It felt like too many choices all at once. So I would just wait for a friend — someone with similar tastes, at least when it came to spices and such — and order whatever they did, without really understanding what I was getting into. Sometimes it turned out amazing, and other times just okay.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How Amazon&#39;s Elevators Became My Daily Source of Inspiration (And Laughter!)</title>
+      <link>http://localhost:1313/ideas/amazon-elevator-inspiration/</link>
+      <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/ideas/amazon-elevator-inspiration/</guid>
+      <description>&lt;p&gt;So, here&amp;rsquo;s something I never thought would be the highlight of my time at Amazon — elevators. Yeah, you heard that right, elevators!&lt;/p&gt;&#xA;&lt;p&gt;I just hit the two-month mark here, and I&amp;rsquo;ve always heard that when you join a new place, you should take note of everything — what&amp;rsquo;s good, what&amp;rsquo;s not — because eventually, you&amp;rsquo;ll just get used to it. So I&amp;rsquo;ve been on the lookout for inspiration, and oddly enough, it came from a place I would have never expected.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How Do You, as a Software Engineer, Protect Your Weekends?</title>
+      <link>http://localhost:1313/ideas/protecting-your-weekends/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/ideas/protecting-your-weekends/</guid>
+      <description>&lt;p&gt;Saving your weekends and getting to do the things you&amp;rsquo;ve always wanted starts long before the clock strikes midnight on Friday.&lt;/p&gt;&#xA;&lt;p&gt;As software engineers — whether working remotely or in-person — we need to be mindful of how we spend our time, especially on Fridays. It&amp;rsquo;s easy to get distracted: a failing build, a known bug that&amp;rsquo;ll take time to fix, being on-call over the weekend, or waiting on a team that&amp;rsquo;s already clocked out. All these little things tempt us to think we have the whole weekend to deal with work, which leads us to binge Netflix or scroll Instagram instead.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

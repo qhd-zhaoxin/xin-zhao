@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>S3 on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/s3/</link>
+    <description>Recent content in S3 on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/s3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Object Storage is All You Need: Justin Cormack</title>
+      <link>http://localhost:1313/tech/object-storage-is-all-you-need/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/object-storage-is-all-you-need/</guid>
+      <description>&lt;p&gt;A summary of one of the standout talks from KubeCon by Justin Cormack, CTO of Docker: &lt;em&gt;&amp;ldquo;Object Storage is All You Need.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;Amazon S3 has been an excellent primitive on the object storage front. As Jeff Bezos put it, it truly is the &amp;ldquo;malloc for the internet.&amp;rdquo; But what exactly is an object store?&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-an-object-store&#34;&gt;What is an Object Store?&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A key-value (KV) store powered by HTTP APIs&lt;/li&gt;&#xA;&lt;li&gt;Allows listing functionality to some extent&lt;/li&gt;&#xA;&lt;li&gt;Objects can only be updated as a whole, not in parts&lt;/li&gt;&#xA;&lt;li&gt;Essentially a minimal, non-POSIX filesystem&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The &amp;ldquo;non-POSIX&amp;rdquo; part is particularly important — let&amp;rsquo;s dig into why.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

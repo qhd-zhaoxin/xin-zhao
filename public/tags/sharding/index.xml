@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sharding on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/sharding/</link>
+    <description>Recent content in Sharding on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/sharding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Database Sharding and Partitioning</title>
+      <link>http://localhost:1313/tech/database-sharding-and-partitioning/</link>
+      <pubDate>Mon, 21 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/database-sharding-and-partitioning/</guid>
+      <description>&lt;h2 id=&#34;what-is-a-database-server&#34;&gt;What is a Database Server?&lt;/h2&gt;&#xA;&lt;p&gt;A DB server is just a database process (&lt;code&gt;mysqld&lt;/code&gt;, &lt;code&gt;mongod&lt;/code&gt;) running in an EC2 instance. It exposes a port through which outside requests can communicate — default 3306 for MySQL, configurable at installation.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;code&gt;d&lt;/code&gt; in &lt;code&gt;mysqld&lt;/code&gt; signifies it&amp;rsquo;s a &lt;strong&gt;daemon process&lt;/strong&gt; — it keeps running in the background of a specific instance.&lt;/p&gt;&#xA;&lt;h2 id=&#34;vertical-scaling&#34;&gt;Vertical Scaling&lt;/h2&gt;&#xA;&lt;p&gt;Increasing the RAM and disk of the EC2 instance the DB server resides on. No change to the &lt;code&gt;mysqld&lt;/code&gt; process itself.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

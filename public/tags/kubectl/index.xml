@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubectl on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/kubectl/</link>
+    <description>Recent content in Kubectl on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/kubectl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The &#34;apply&#34; Evolution in Kubernetes</title>
+      <link>http://localhost:1313/tech/kubernetes-apply-evolution/</link>
+      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/kubernetes-apply-evolution/</guid>
+      <description>&lt;p&gt;In Kubernetes, &lt;code&gt;kubectl apply&lt;/code&gt; is the bridge between &lt;strong&gt;desired state&lt;/strong&gt; (the YAML file) and &lt;strong&gt;live state&lt;/strong&gt; (the cluster). The &amp;ldquo;apply&amp;rdquo; logic determines how the cluster calculates the difference between these two states and who is allowed to change what.&lt;/p&gt;&#xA;&lt;h2 id=&#34;client-side-apply-the-legacy-method&#34;&gt;Client-Side Apply (The Legacy Method)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Logic:&lt;/strong&gt; &amp;ldquo;math&amp;rdquo; happens on the client side — your local machine&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mechanism:&lt;/strong&gt; uses a &lt;code&gt;last-applied-configuration&lt;/code&gt; annotation stored on the object&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;3-way merge:&lt;/strong&gt; kubectl compares the local file, the live state, and the last applied annotation&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Flaw:&lt;/strong&gt; It&amp;rsquo;s a &amp;ldquo;last-writer wins&amp;rdquo; system — blindly applies any change proposed at the last minute as the final state&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Win:&lt;/strong&gt; Simple and compatible with very old versions of Kubernetes where field ownership doesn&amp;rsquo;t exist&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;server-side-apply-the-modern-standard&#34;&gt;Server-Side Apply (The Modern Standard)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Logic:&lt;/strong&gt; &amp;ldquo;math&amp;rdquo; moves to the Kubernetes API server&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mechanism:&lt;/strong&gt; uses &lt;code&gt;managedFields&lt;/code&gt; in the object metadata&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Field ownership:&lt;/strong&gt; SSA introduces the concept of a &lt;em&gt;field manager&lt;/em&gt; — every field in a manifest is &amp;ldquo;owned&amp;rdquo; by the person or tool that applied it&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Conflict detection:&lt;/strong&gt; if two managers try to control the same field with different values, the API server blocks the change and throws a conflict error&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Win:&lt;/strong&gt; enables cooperative management — HPA can own the number of replicas while a human operator owns the image version&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;technical-deep-dive&#34;&gt;Technical Deep Dive&lt;/h2&gt;&#xA;&lt;p&gt;The secret to SSA is the &lt;code&gt;managedFields&lt;/code&gt; ledger. You can inspect it by running:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

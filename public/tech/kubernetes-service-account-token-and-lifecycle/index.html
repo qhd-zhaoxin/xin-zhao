@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kubernetes Service Account Token and Lifecycle | The Global Journal by Sitesh</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/books/">Books</a></li>
+      
+      <li><a href="/culture/">Culture</a></li>
+      
+      <li><a href="/curiosity/">Curiosity</a></li>
+      
+      <li><a href="/ideas/">Ideas</a></li>
+      
+      <li><a href="/tech/">Tech</a></li>
+      
+      <li><a href="/travel/">Travel</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Kubernetes Service Account Token and Lifecycle</span></h1>
+<h2 class="author">Sitesh Pattanaik</h2>
+<h2 class="date">2026/09/20</h2>
+</div>
+
+<main>
+<h3 id="phases">Phases</h3>
+<ul>
+<li>
+<p><strong>Phase 1: Pod Scheduling and Assignment</strong></p>
+</li>
+<li>
+<p><strong>Phase 2: Projected Service Account Token Provisioning</strong></p>
+</li>
+<li>
+<p><strong>Phase 3: The Secure TLS Handshake &amp; API Server Spoof Prevention</strong></p>
+</li>
+<li>
+<p><strong>Phase 4: API Authentication (AuthN) and Authorization (AuthZ)</strong></p>
+</li>
+</ul>
+<h4 id="phase-1">Phase 1</h4>
+<ul>
+<li>A pod is deployed via applying the <code>kubectl apply -f pod.yaml</code></li>
+<li>As kubectl is getting the request, it persists the required object in ETCD.</li>
+<li>The scheduler sees that there is a new pod that is not bound to a node.
+<ul>
+<li>it figures out the right node for this pod based on all the constraints as well as capacity on the node</li>
+<li>it updates the pod&rsquo;s <code>nodeName</code> based on that.</li>
+</ul>
+</li>
+<li>The kubelet on the NodeName which is constantly watching the api-server for it&rsquo;s node name, notices the assignment</li>
+</ul>
+<h4 id="phase-2">Phase 2</h4>
+<ul>
+<li>The kubelet starts preparing for the pod.
+<ul>
+<li>The kubelet realizes it would require a ServiceAccount for the pod first.</li>
+<li>calls the api-server via the <code>TokenRequest API</code> endpoint</li>
+</ul>
+</li>
+<li>API-server creates a JSON payload containing (service account name, pod UID, namespace, expiration), signs it with its own private key and this forms the JWT token.</li>
+<li>The API-server hands back this token to kubelet.</li>
+<li>The kubelet, creates a folder in the host machine and stores these 3 things
+<ul>
+<li>token (the one sent above)</li>
+<li>ca.crt (the cluster&rsquo;s root CA public cert - which it copies from host files)</li>
+<li>namespace</li>
+</ul>
+</li>
+<li>the kubelet binds this to <code>/var/run/secret/kubernetes.io/serviceaccount</code></li>
+</ul>
+<h4 id="phase-3">Phase 3</h4>
+<ul>
+<li>the application inside the pod wants to talk to the api-server
+<ul>
+<li>it reads the <code>token</code> and <code>ca.crt</code> from it&rsquo;s local path</li>
+</ul>
+</li>
+<li>the pod initiates the HTTPS TLS request
+<ul>
+<li>the api-server responds by sending TLS Server Cert</li>
+<li>the pod validates if this cert is signed by the same ca.crt i have on my disk</li>
+</ul>
+</li>
+</ul>
+<h4 id="phase-4">Phase 4</h4>
+<ul>
+<li>The pod sends the token in the HTTP request as part of Authorization: Bearer <token></li>
+<li>The API-server reads it and validates using it&rsquo;s public cert and confirms the identity of the service account.</li>
+<li>Then the request is handed over to the RBAC engine for next steps.</li>
+</ul>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://your-site.netlify.app">Sitesh Pattanaik</a> 2026
+  
+  </footer>
+  </body>
+</html>
+

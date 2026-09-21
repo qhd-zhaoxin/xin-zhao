@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Database Sharding and Partitioning | The Global Journal by Sitesh</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/books/">Books</a></li>
+      
+      <li><a href="/culture/">Culture</a></li>
+      
+      <li><a href="/curiosity/">Curiosity</a></li>
+      
+      <li><a href="/ideas/">Ideas</a></li>
+      
+      <li><a href="/tech/">Tech</a></li>
+      
+      <li><a href="/travel/">Travel</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Database Sharding and Partitioning</span></h1>
+
+<h2 class="date">2024/10/21</h2>
+</div>
+
+<main>
+<h2 id="what-is-a-database-server">What is a Database Server?</h2>
+<p>A DB server is just a database process (<code>mysqld</code>, <code>mongod</code>) running in an EC2 instance. It exposes a port through which outside requests can communicate — default 3306 for MySQL, configurable at installation.</p>
+<p>The <code>d</code> in <code>mysqld</code> signifies it&rsquo;s a <strong>daemon process</strong> — it keeps running in the background of a specific instance.</p>
+<h2 id="vertical-scaling">Vertical Scaling</h2>
+<p>Increasing the RAM and disk of the EC2 instance the DB server resides on. No change to the <code>mysqld</code> process itself.</p>
+<p><strong>Limitation</strong> — there is a physical limit to how large an instance can get. Vertical scaling can only go so far.</p>
+<h2 id="horizontal-scaling">Horizontal Scaling</h2>
+<h3 id="read-replicas-scale-reads">Read Replicas (scale reads)</h3>
+<ul>
+<li>Add another DB server by launching another EC2 instance with a <code>mysqld</code> process</li>
+<li>Configure a replication strategy from master to replica — eventually all data becomes consistent</li>
+<li>Allows more reads across the system, while each individual DB server still has the same physical limits</li>
+</ul>
+<p>Read replicas don&rsquo;t help with high <strong>write</strong> throughput — for that, you need sharding.</p>
+<h3 id="sharding-and-partitioning-scale-writes">Sharding and Partitioning (scale writes)</h3>
+<p>Add another DB server, but this time <strong>split the data</strong> across both:</p>
+<ul>
+<li>Each split of the data is called a <strong>partition</strong></li>
+<li>Each DB server holding a partition is called a <strong>shard</strong></li>
+<li>Both shards can handle reads and writes independently</li>
+<li>No replication strategy needed — each shard contains a mutually exclusive dataset</li>
+</ul>
+<p>In other words: <strong>the DB server is sharded, the data is partitioned.</strong></p>
+<h2 id="data-partitioning">Data Partitioning</h2>
+<pre><code>d1 + d2 + d3 + d4 + d5 = total data
+</code></pre>
+<p><img src="/images/partitioning-1.webp" alt="Paritioning!"></p>
+<p>Each partition maps to a shard. If a partition becomes hot and frequently accessed, it can be moved to a different shard.</p>
+<h3 id="categories-of-partitioning">Categories of Partitioning</h3>
+<p><strong>Horizontal Partitioning</strong> — operates at the document or row level. Split rows across shards based on a key (e.g. user ID ranges).</p>
+<p><strong>Vertical Partitioning</strong> — operates at the column or table level. Split columns or entire tables across shards based on access patterns.</p>
+<p>The right choice depends on access pattern, load, and use case.</p>
+<p><img src="/images/partitioning-2.webp" alt="Paritioning!"></p>
+<h2 id="the-four-configurations">The Four Configurations</h2>
+<p><strong>A</strong> — Single DB server in a single EC2 instance. The baseline.</p>
+<p><strong>B</strong> — Single DB server in a single EC2 instance, with logical partitioning (e.g. two separate databases). Same machine, different logical separation.</p>
+<p><strong>C</strong> — Single DB server running across two EC2 instances, both with the same data. This is the <strong>read replica</strong> use case.</p>
+<p><strong>D</strong> — Single DB server running across two EC2 instances, with data <strong>shared</strong> across both instances. This is true <strong>sharding</strong>.</p>
+<h2 id="advantages-of-sharding">Advantages of Sharding</h2>
+<ul>
+<li>Handle higher reads and writes</li>
+<li>Increase overall storage capacity</li>
+<li>Higher availability</li>
+</ul>
+<h2 id="disadvantages-of-sharding">Disadvantages of Sharding</h2>
+<ul>
+<li>Operationally complex</li>
+<li>Cross-shard queries are extremely complex — a lot of thought needs to go into how to partition the data upfront</li>
+</ul>
+<h3 id="references">References:</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=wXvljefXyEo">https://www.youtube.com/watch?v=wXvljefXyEo</a></li>
+</ul>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://your-site.netlify.app">Sitesh Pattanaik</a> 2026
+  
+  </footer>
+  </body>
+</html>
+

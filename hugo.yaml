@@ -1,0 +1,61 @@
+baseurl: "https://merry-kheer-74befa.netlify.app/"  # please update this to your actual URL
+languageCode: "en-us"
+title: "Xin Zhao Website"
+theme: "hugo-xmin"
+googleAnalytics: ""
+disqusShortname: ""
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
+footnotereturnlinkcontents: "↩"
+
+permalinks:
+  note: "/note/:year/:month/:day/:slug/"
+  post: "/post/:year/:month/:day/:slug/"
+
+menu:
+  main:
+    - name: Home
+      url: ""
+      weight: 1
+    - name: Books
+      url: "books/"
+      weight: 2
+    - name: Culture
+      url: "culture/"
+      weight: 3
+    - name: Curiosity
+      url: "curiosity/"
+      weight: 4
+    - name: Ideas
+      url: "ideas/"
+      weight: 5
+    - name: Tech
+      url: "tech/"
+      weight: 6
+    - name: Travel
+      url: "travel/"
+      weight: 7
+    - name: About
+      url: "about/"
+      weight: 8
+
+params:
+  footer: "&copy; [Sitesh Pattanaik](https://your-site.netlify.app) {Year}"
+
+markup:
+  highlight:
+    codeFences: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+          - - \[
+            - \]
+          - - $$
+            - $$
+          inline:
+          - - \(
+            - \)

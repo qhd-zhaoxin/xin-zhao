@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Graphql on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/graphql/</link>
+    <description>Recent content in Graphql on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 12 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/graphql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>REST vs GraphQL</title>
+      <link>http://localhost:1313/tech/rest-vs-graphql/</link>
+      <pubDate>Sat, 12 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/rest-vs-graphql/</guid>
+      <description>&lt;p&gt;The main difference between them is how data is sent to the client.&lt;/p&gt;&#xA;&lt;h2 id=&#34;rest-architecture&#34;&gt;REST Architecture&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The client makes an HTTP request and the data is sent as an HTTP response.&lt;/li&gt;&#xA;&lt;li&gt;The structure of the request object is defined on the server.&lt;/li&gt;&#xA;&lt;li&gt;REST requires sending multiple API requests to fetch data from multiple sources.&lt;/li&gt;&#xA;&lt;li&gt;The problem of over/under fetching is solved by fetching resources as per the views present in the app. This makes the system tightly coupled.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;graphql&#34;&gt;GraphQL&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The client can control all the data it needs from the server.&lt;/li&gt;&#xA;&lt;li&gt;In other words, the client doesn&amp;rsquo;t get affected by under/over fetching or n+1 request problems — improves performance and reduces network bandwidth.&lt;/li&gt;&#xA;&lt;li&gt;In GraphQL, the request object is defined by the client.&lt;/li&gt;&#xA;&lt;li&gt;GraphQL simplifies data aggregation from multiple sources in a single API call.&lt;/li&gt;&#xA;&lt;li&gt;The resources are not exposed as per the views present in the app.&lt;/li&gt;&#xA;&lt;li&gt;GraphQL is an alternative to REST, not a replacement. Filtration logic can be implemented based on request parameters in REST as well.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;graphql-performance-issues&#34;&gt;GraphQL Performance Issues&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The user can&amp;rsquo;t run any query they want — the API must be well-designed using GraphQL domain language.&lt;/li&gt;&#xA;&lt;li&gt;Accessing multiple resources in a single API call might lead to deeply nested queries, potentially taking down a whole server.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

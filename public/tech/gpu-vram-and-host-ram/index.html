@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GPU VRAM and Host RAM | The Global Journal by Sitesh</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/books/">Books</a></li>
+      
+      <li><a href="/culture/">Culture</a></li>
+      
+      <li><a href="/curiosity/">Curiosity</a></li>
+      
+      <li><a href="/ideas/">Ideas</a></li>
+      
+      <li><a href="/tech/">Tech</a></li>
+      
+      <li><a href="/travel/">Travel</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">GPU VRAM and Host RAM</span></h1>
+<h2 class="author">Sitesh Pattanaik</h2>
+<h2 class="date">2026/09/08</h2>
+</div>
+
+<main>
+<p>understanding differences between gpu vram and host ram</p>
+<h3 id="gpu-vram">GPU VRAM</h3>
+<ul>
+<li>otherwise known as HBM - high bandwidth memory</li>
+<li>sits directly on the GPU package, connected by a very short, very wide bus.</li>
+<li>on H100, that&rsquo;s 80GB of HBM3 at 3.35 TB/s.</li>
+<li>on B200, it&rsquo;s 192GB of HBM3E at 8 TB/s.</li>
+</ul>
+<h3 id="host-ram">Host RAM</h3>
+<ul>
+<li>DDR5 is much larger &ndash; 1-2 TB per server but far slower in bandwidth and latency</li>
+<li>slower as it&rsquo;s not on GPU, the GPU has to use PCIe  &ndash; portable component interconnect &ndash; to connect to the host RAM</li>
+</ul>
+<h4 id="practical-consequence">practical consequence</h4>
+<ul>
+<li>if the model + KV cache doesn&rsquo;t fit in VRAM, you either shard the model across multiple GPUs, quantize or offload to host RAM.</li>
+<li>offloading to host RAM is pretty slower because every access would go through the PCIe.</li>
+</ul>
+<h3 id="pcie-channels">PCIe Channels</h3>
+<ul>
+<li>
+<p>Peripheral Component Interconnect Express</p>
+</li>
+<li>
+<p>This is a general purpose high speed bus used to connect the CPU/host to add in ards like GPUs, NVMe SSDs, network cards, etc.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>PCIe Gen15 x16 gives roughly 64GB/s in each direction between CPU/Host Ram and GPU. Compare to that of 3-8TB/s of HBM bandwidth inside the GPU. This link is used for</p>
+<ul>
+<li>Loading weights/data from host into VRAM initially.</li>
+<li>GPU-GPU traffic when the NVLink isn&rsquo;t available.</li>
+</ul>
+</li>
+</ul>
+<h3 id="nvlink-nvswitch">NVLink/ NVSwitch</h3>
+<p>This made possible multiple GPU to talk to each other and to behave as a single GPU.</p>
+<ul>
+<li><strong>NVLink</strong>: a direct GPU to GPU interconnect that bypasses the CPU/PCIe entirely. H100(NVLink 4) gives ~900GB /s aggregate per GPU; B200 (NVLink5) roughly doubles that to 1.8TB/s.</li>
+<li>NVSwitch: a switch chip that connects all GPUs in a node so any GPU can talk to any other GPU at full NVLink bandwidth &ndash; not just neighbour to neighbour. A DGX H100 node has 8 GPUs fully messed this way. NVIDIA&rsquo;s newer NVL72 rack-scale systems extend this switch to 72 GPUs.</li>
+</ul>
+<h4 id="order">Order</h4>
+<ul>
+<li>Object Storage (S3) - 1-10GB/s</li>
+<li>NVMe SSD (local cache) - 5-7 GB/s per drive</li>
+<li>Host RAM (DDR5) - 200-400GB/s</li>
+<li>GPU VRAM (HBM3/ HBM3e) - 3000-8000 GB/s</li>
+</ul>
+<h4 id="practical-consequence-1">practical consequence</h4>
+<ul>
+<li>This is the exact reason cold start latencies is dominated by object stores and the steady state inference speed is dominated by HBM.</li>
+<li>Once weights are instated in VRAM, the GPU doesn&rsquo;t need to travel the hierarchy.</li>
+</ul>
+<h4 id="infiniband--roce">InfiniBand / RoCE</h4>
+<p>InfiniBand: The propritary technology of NVIDIA to do RDMA (remote direct memory access) &ndash; access remote computer&rsquo;s RAM without involving remote computer&rsquo;s CPU.</p>
+<p>RoCE - RDMA over Converged Ethernet - is a generic way to do RDMA.</p>
+<p>note:</p>
+<ul>
+<li>the whole process of RDMA would require some form of CPU computation to translate the virtual address into physical address space. how does that work?</li>
+<li>that&rsquo;s the whole point of a memory registration phase with something called as RNIC (RDMA enabled NIC) which handles the address translation</li>
+<li>ordering wise, when a host computer is ready to use RDMA, it notifies the host CPU and blocks a certain part of virtual memory to be used for RDMA, and the tranlation sheet is handed over to RNIC for future translation making the host CPU free.</li>
+</ul>
+<h4 id="why-pcie-exists">Why PCIe Exists?</h4>
+<ul>
+<li>A CPU can&rsquo;t directly talk to all the peripheral devices using custom wiring &ndash; there are too many kinds of devices.</li>
+<li>hence, computers standardize on a shared I/O bus on which device manufacturers can build against.</li>
+<li>this enables peripheral devices to read/write from host RAM without CPU. otherwise, all the essential cycles of CPU would be lost copying the data over.</li>
+<li><strong>Interrupts</strong> - this is a way for the peripheral devices to notify CPU that it&rsquo;s completed the work.</li>
+</ul>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://your-site.netlify.app">Sitesh Pattanaik</a> 2026
+  
+  </footer>
+  </body>
+</html>
+

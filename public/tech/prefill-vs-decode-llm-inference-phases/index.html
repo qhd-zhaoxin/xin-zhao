@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prefill vs Decode : LLM Inference phases | The Global Journal by Sitesh</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/books/">Books</a></li>
+      
+      <li><a href="/culture/">Culture</a></li>
+      
+      <li><a href="/curiosity/">Curiosity</a></li>
+      
+      <li><a href="/ideas/">Ideas</a></li>
+      
+      <li><a href="/tech/">Tech</a></li>
+      
+      <li><a href="/travel/">Travel</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Prefill vs Decode : LLM Inference phases</span></h1>
+<h2 class="author">Sitesh Pattanaik</h2>
+<h2 class="date">2026/09/10</h2>
+</div>
+
+<main>
+<p>Every llm request runs in two distinct phases: prefill, where the model reads the whole prompt in one parallel burst, and decode, where it generates the response one token at a time, each one depending on the last.</p>
+<ul>
+<li>if the chatbot feels slow before the first word appears, then it&rsquo;s a prefill issue.</li>
+<li>if it crawls during the token generation, then it&rsquo;s a decode issue</li>
+</ul>
+<p><strong>Prefill</strong> - this processes your entire input prompt at once, including system instruction, retrived context, and the user message. It builds the internal state, called the KV cache, that the model needs for the generation phase.</p>
+<p><strong>Decode</strong> - this generates response one token at a time. using the cache state from prefill, it produces a token, feeds it back in, and repeats this until the response is complete.</p>
+<p>due to the way the job is done, prefill is a compute bound process while decode is a memory-bandwidth-bound process considering how fast GPU can move data around.</p>
+<h3 id="prefill-drives-the-time-to-first-token-ttft">Prefill: drives the time to first token (ttft)</h3>
+<ul>
+<li>attention is the catch</li>
+<li>the length of the input prompt is roughly increases the attention work by a square of the length</li>
+<li>prefill has to finish everything before the model can output anything</li>
+<li>hence, for RAG based workflows, which have huge input prompts, the intial response time feels much longer</li>
+</ul>
+<h4 id="optimization-levers">optimization levers</h4>
+<ul>
+<li>
+<p><strong>efficient attention and flash attention</strong>: there are a class of optimizations that helps prefill faster but the model produces same output.</p>
+<ul>
+<li>FlashAttention doesn&rsquo;t do approximations</li>
+<li>it fuses operations such as SoftMax, dot-product etc and minimizes GPU memory reads/writes by using tiling techniques and efficient memory access patterns. (will cover in a later blog)</li>
+</ul>
+</li>
+<li>
+<p><strong>semantic caching</strong>: it works at the inference pipeline which reuses the LLM responses if the new prompt is sematically similar to the one earlier.</p>
+<ul>
+<li>this is a vector search problem where the incoming vectors are compared against query vectors</li>
+</ul>
+</li>
+</ul>
+<h3 id="decode-token-generation-drives-the-inter-token-latency-itl">Decode: token generation drives the inter token latency (itl)</h3>
+<ul>
+<li>every decode step depends on the prior token generated</li>
+<li>the memory is the kv cache</li>
+<li>itl = average per token time
+= (end_to_end_latency - ttft)/(out_token - 1)</li>
+</ul>
+<h4 id="optimization-levers-1">optimization levers</h4>
+<ul>
+<li>
+<p><strong>speculative decoding</strong>: this uses a small model to guess what tokens the main model would produce, then has the main model verify them in parallel.</p>
+<ul>
+<li>when the guesses are right, the user get multiple tokens for the cost of a single decode step.</li>
+<li>the catch is the accuracy of the small/draft model, otherwise it adds up the latency.</li>
+</ul>
+</li>
+<li>
+<p><strong>quantization</strong>: it shrinks the numeric representation of the model&rsquo;s data, using fewer bits per number to store roughly the same information.</p>
+<ul>
+<li>trade offs accuracy a bit.</li>
+</ul>
+</li>
+</ul>
+<h4 id="appendix">Appendix</h4>
+<p>Reference: <a href="https://redis.io/blog/prefill-vs-decode/">https://redis.io/blog/prefill-vs-decode/</a></p>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://your-site.netlify.app">Sitesh Pattanaik</a> 2026
+  
+  </footer>
+  </body>
+</html>
+

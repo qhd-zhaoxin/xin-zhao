@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Living Ahead of Time: Daylight Savings and Beyond | The Global Journal by Sitesh</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/books/">Books</a></li>
+      
+      <li><a href="/culture/">Culture</a></li>
+      
+      <li><a href="/curiosity/">Curiosity</a></li>
+      
+      <li><a href="/ideas/">Ideas</a></li>
+      
+      <li><a href="/tech/">Tech</a></li>
+      
+      <li><a href="/travel/">Travel</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Living Ahead of Time: Daylight Savings and Beyond</span></h1>
+
+<h2 class="date">2024/11/27</h2>
+</div>
+
+<main>
+<p>Once daylight savings ended on November 3, 2024, I wanted to fix my sleep schedule — so I decided not to move back the analog clock in my house. The world is mostly digital though, so I manually adjusted the time on my phone and digital watch to not respect the time change. In other words, my clock was running 1 hour ahead of the true time in my region.</p>
+<p>When I tried signing into various accounts like Namecheap and LinkedIn using my 2FA authenticator app, I consistently failed with:</p>
+<blockquote>
+<p><em>&ldquo;Oops! The OTP code you submitted is incorrect, has already been used, or expired.&rdquo;</em></p>
+</blockquote>
+<p>I got frustrated and eventually reached out to Namecheap&rsquo;s support team, who explained that all TOTP (time-based one-time password) systems rely on synchronized time — my manual adjustment had broken that. They provided steps to sync my app&rsquo;s time, and that fixed it.</p>
+<p>This got me curious about how authenticator-based OTPs actually work.</p>
+<h2 id="during-initial-setup">During Initial Setup</h2>
+<ul>
+<li>You scan a QR code</li>
+<li>This establishes a <strong>shared secret key</strong> between the app and the server</li>
+<li>The secret key is stored on your device and used to generate OTPs</li>
+</ul>
+<h2 id="the-algorithm">The Algorithm</h2>
+<p>Most 2FA apps use <strong>TOTP (Time-Based One-Time Password)</strong>, derived from <strong>HOTP (HMAC-Based One-Time Password)</strong>.</p>
+<p>TOTP:</p>
+<ul>
+<li>Relies on the current device time</li>
+<li>Divides time into <strong>30-second intervals</strong></li>
+</ul>
+<h2 id="the-algorithm-in-detail">The Algorithm in Detail</h2>
+<p><strong>Step 1</strong> — The current Unix timestamp is divided into 30-second chunks:</p>
+<pre><code>T = floor(current_time / 30)
+</code></pre>
+<p><strong>Step 2</strong> — The app calculates an HMAC (hash-based message authentication code):</p>
+<pre><code>HMAC = HMAC_SHA1(secret_key, time_step)
+</code></pre>
+<p>Either SHA-1, SHA-256, or SHA-512 can be used.</p>
+<p><strong>Step 3</strong> — The resulting HMAC output is truncated to generate the OTP:</p>
+<pre><code>OTP = (truncated_HMAC &amp; 0x7FFFFFFF) % 10^6
+</code></pre>
+<p>The mask <code>0x7FFFFFFF</code> ensures the OTP is always a positive number.</p>
+<p><strong>Step 4</strong> — The server generates the OTP the same way and compares it to your input. To account for slight discrepancies, the server may also accept OTPs from the previous or next 30-second window.</p>
+<p>Since my time was wrong by a full hour, the server&rsquo;s OTP and my app&rsquo;s OTP were in completely different time windows — hence the mismatch.</p>
+<hr>
+<p>Thanks Namecheap for the quick resolution and an accidental intro to a fun system design problem.</p>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © <a href="https://your-site.netlify.app">Sitesh Pattanaik</a> 2026
+  
+  </footer>
+  </body>
+</html>
+

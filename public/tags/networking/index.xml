@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/networking/</link>
+    <description>Recent content in Networking on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Can SSL/TLS Be Used Interchangeably?</title>
+      <link>http://localhost:1313/tech/ssl-vs-tls/</link>
+      <pubDate>Fri, 20 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/ssl-vs-tls/</guid>
+      <description>&lt;p&gt;Man, it totally confused me! Let&amp;rsquo;s dig into this and check out the world of HTTPS communication.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;SSL (Secure Sockets Layer)&lt;/strong&gt; — an encryption-based internet security protocol. In simple terms, it defines a way to encrypt data at the source (client) and decrypt it at the destination (server). It&amp;rsquo;s the predecessor to modern TLS.&lt;/p&gt;&#xA;&lt;p&gt;To provide high security, data is encrypted at the source before being sent through the network — to avoid &amp;ldquo;Man in the Middle&amp;rdquo; attacks. But then, how do the server and client agree on which algorithm to use and what the secret key should be? If those keys are passed in plain text, someone can use them to decrypt the content and tamper with the whole communication.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Telnet vs SSH</title>
+      <link>http://localhost:1313/tech/telnet-vs-ssh/</link>
+      <pubDate>Sun, 15 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/telnet-vs-ssh/</guid>
+      <description>&lt;p&gt;When I was working at a small startup back in the day, there wouldn&amp;rsquo;t always be enough subject matter experts (SMEs) to solve problems due to small dev teams. In most cases, the startup required the engineering manager to be highly technical.&lt;/p&gt;&#xA;&lt;p&gt;Back then, we were manually deploying by building the Rust web server on the EC2 instance and restarting the application server for non-prod environments.&lt;/p&gt;&#xA;&lt;p&gt;Once, there was an issue where we were not able to SSH into the machine, and my manager quickly joined the call and fired a Telnet command first to check the connectivity. I couldn&amp;rsquo;t understand why he preferred Telnet over SSH — maybe it was just what he was familiar with, I thought.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

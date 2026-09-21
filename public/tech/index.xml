@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tech on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tech/</link>
+    <description>Recent content in tech on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Sep 2026 08:15:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes Service Account Token and Lifecycle</title>
+      <link>http://localhost:1313/tech/kubernetes-service-account-token-and-lifecycle/</link>
+      <pubDate>Sun, 20 Sep 2026 08:15:00 -0700</pubDate>
+      <guid>http://localhost:1313/tech/kubernetes-service-account-token-and-lifecycle/</guid>
+      <description>&lt;h3 id=&#34;phases&#34;&gt;Phases&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Phase 1: Pod Scheduling and Assignment&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Phase 2: Projected Service Account Token Provisioning&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Phase 3: The Secure TLS Handshake &amp;amp; API Server Spoof Prevention&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Phase 4: API Authentication (AuthN) and Authorization (AuthZ)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;phase-1&#34;&gt;Phase 1&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A pod is deployed via applying the &lt;code&gt;kubectl apply -f pod.yaml&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;As kubectl is getting the request, it persists the required object in ETCD.&lt;/li&gt;&#xA;&lt;li&gt;The scheduler sees that there is a new pod that is not bound to a node.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;it figures out the right node for this pod based on all the constraints as well as capacity on the node&lt;/li&gt;&#xA;&lt;li&gt;it updates the pod&amp;rsquo;s &lt;code&gt;nodeName&lt;/code&gt; based on that.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;The kubelet on the NodeName which is constantly watching the api-server for it&amp;rsquo;s node name, notices the assignment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;phase-2&#34;&gt;Phase 2&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The kubelet starts preparing for the pod.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The kubelet realizes it would require a ServiceAccount for the pod first.&lt;/li&gt;&#xA;&lt;li&gt;calls the api-server via the &lt;code&gt;TokenRequest API&lt;/code&gt; endpoint&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;API-server creates a JSON payload containing (service account name, pod UID, namespace, expiration), signs it with its own private key and this forms the JWT token.&lt;/li&gt;&#xA;&lt;li&gt;The API-server hands back this token to kubelet.&lt;/li&gt;&#xA;&lt;li&gt;The kubelet, creates a folder in the host machine and stores these 3 things&#xA;&lt;ul&gt;&#xA;&lt;li&gt;token (the one sent above)&lt;/li&gt;&#xA;&lt;li&gt;ca.crt (the cluster&amp;rsquo;s root CA public cert - which it copies from host files)&lt;/li&gt;&#xA;&lt;li&gt;namespace&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;the kubelet binds this to &lt;code&gt;/var/run/secret/kubernetes.io/serviceaccount&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;phase-3&#34;&gt;Phase 3&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;the application inside the pod wants to talk to the api-server&#xA;&lt;ul&gt;&#xA;&lt;li&gt;it reads the &lt;code&gt;token&lt;/code&gt; and &lt;code&gt;ca.crt&lt;/code&gt; from it&amp;rsquo;s local path&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;the pod initiates the HTTPS TLS request&#xA;&lt;ul&gt;&#xA;&lt;li&gt;the api-server responds by sending TLS Server Cert&lt;/li&gt;&#xA;&lt;li&gt;the pod validates if this cert is signed by the same ca.crt i have on my disk&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;phase-4&#34;&gt;Phase 4&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The pod sends the token in the HTTP request as part of Authorization: Bearer &lt;token&gt;&lt;/li&gt;&#xA;&lt;li&gt;The API-server reads it and validates using it&amp;rsquo;s public cert and confirms the identity of the service account.&lt;/li&gt;&#xA;&lt;li&gt;Then the request is handed over to the RBAC engine for next steps.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Prefill vs Decode : LLM Inference phases</title>
+      <link>http://localhost:1313/tech/prefill-vs-decode-llm-inference-phases/</link>
+      <pubDate>Thu, 10 Sep 2026 19:14:00 -0700</pubDate>
+      <guid>http://localhost:1313/tech/prefill-vs-decode-llm-inference-phases/</guid>
+      <description>&lt;p&gt;Every llm request runs in two distinct phases: prefill, where the model reads the whole prompt in one parallel burst, and decode, where it generates the response one token at a time, each one depending on the last.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;if the chatbot feels slow before the first word appears, then it&amp;rsquo;s a prefill issue.&lt;/li&gt;&#xA;&lt;li&gt;if it crawls during the token generation, then it&amp;rsquo;s a decode issue&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Prefill&lt;/strong&gt; - this processes your entire input prompt at once, including system instruction, retrived context, and the user message. It builds the internal state, called the KV cache, that the model needs for the generation phase.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GPU VRAM and Host RAM</title>
+      <link>http://localhost:1313/tech/gpu-vram-and-host-ram/</link>
+      <pubDate>Tue, 08 Sep 2026 04:59:00 -0700</pubDate>
+      <guid>http://localhost:1313/tech/gpu-vram-and-host-ram/</guid>
+      <description>&lt;p&gt;understanding differences between gpu vram and host ram&lt;/p&gt;&#xA;&lt;h3 id=&#34;gpu-vram&#34;&gt;GPU VRAM&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;otherwise known as HBM - high bandwidth memory&lt;/li&gt;&#xA;&lt;li&gt;sits directly on the GPU package, connected by a very short, very wide bus.&lt;/li&gt;&#xA;&lt;li&gt;on H100, that&amp;rsquo;s 80GB of HBM3 at 3.35 TB/s.&lt;/li&gt;&#xA;&lt;li&gt;on B200, it&amp;rsquo;s 192GB of HBM3E at 8 TB/s.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;host-ram&#34;&gt;Host RAM&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;DDR5 is much larger &amp;ndash; 1-2 TB per server but far slower in bandwidth and latency&lt;/li&gt;&#xA;&lt;li&gt;slower as it&amp;rsquo;s not on GPU, the GPU has to use PCIe  &amp;ndash; portable component interconnect &amp;ndash; to connect to the host RAM&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;practical-consequence&#34;&gt;practical consequence&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;if the model + KV cache doesn&amp;rsquo;t fit in VRAM, you either shard the model across multiple GPUs, quantize or offload to host RAM.&lt;/li&gt;&#xA;&lt;li&gt;offloading to host RAM is pretty slower because every access would go through the PCIe.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;pcie-channels&#34;&gt;PCIe Channels&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Peripheral Component Interconnect Express&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>intro to containers</title>
+      <link>http://localhost:1313/tech/intro-to-containers/</link>
+      <pubDate>Mon, 15 Jun 2026 11:55:00 -0700</pubDate>
+      <guid>http://localhost:1313/tech/intro-to-containers/</guid>
+      <description>&lt;p&gt;containers are a pretty interesting eco-system in computer science. to understand some of the simple things like why &lt;code&gt;containerd&lt;/code&gt; exists outside of the ecosystem, what happened when kubernetes dropped the support for docker in 1.24+ etc, we need to understand a bit of history of containers.&lt;/p&gt;&#xA;&lt;p&gt;so let&amp;rsquo;s go very basic.&lt;/p&gt;&#xA;&lt;h3 id=&#34;container&#34;&gt;container&lt;/h3&gt;&#xA;&lt;p&gt;container is a simplex linux process with two specific kernel features added to it&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;namespaces : for network, filesystem isolation&lt;/li&gt;&#xA;&lt;li&gt;cgroups: to limit the cpu and memory that the process can use&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;that&amp;rsquo;s it, there is no magic, no VM, no hypervisor. a container is a process in a box.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Consensus and Paxos</title>
+      <link>http://localhost:1313/tech/consensus-and-paxos/</link>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/consensus-and-paxos/</guid>
+      <description>&lt;p&gt;Majority agrees on a proposal → consensus. The reached consensus is eventually adopted by everyone.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-do-systems-need-consensus&#34;&gt;Why Do Systems Need Consensus?&lt;/h2&gt;&#xA;&lt;p&gt;Once you hit enough scale, vertical scaling stops being an option — you have to go horizontal. That introduces the problem of keeping multiple nodes aligned on the same state.&lt;/p&gt;&#xA;&lt;p&gt;There are two common schemas this leads to:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Leader-Replica&lt;/strong&gt; — one node leads, others replicate. If the leader becomes unavailable, the remaining nodes must elect a new one — that requires consensus.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The &#34;apply&#34; Evolution in Kubernetes</title>
+      <link>http://localhost:1313/tech/kubernetes-apply-evolution/</link>
+      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/kubernetes-apply-evolution/</guid>
+      <description>&lt;p&gt;In Kubernetes, &lt;code&gt;kubectl apply&lt;/code&gt; is the bridge between &lt;strong&gt;desired state&lt;/strong&gt; (the YAML file) and &lt;strong&gt;live state&lt;/strong&gt; (the cluster). The &amp;ldquo;apply&amp;rdquo; logic determines how the cluster calculates the difference between these two states and who is allowed to change what.&lt;/p&gt;&#xA;&lt;h2 id=&#34;client-side-apply-the-legacy-method&#34;&gt;Client-Side Apply (The Legacy Method)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Logic:&lt;/strong&gt; &amp;ldquo;math&amp;rdquo; happens on the client side — your local machine&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mechanism:&lt;/strong&gt; uses a &lt;code&gt;last-applied-configuration&lt;/code&gt; annotation stored on the object&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;3-way merge:&lt;/strong&gt; kubectl compares the local file, the live state, and the last applied annotation&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Flaw:&lt;/strong&gt; It&amp;rsquo;s a &amp;ldquo;last-writer wins&amp;rdquo; system — blindly applies any change proposed at the last minute as the final state&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Win:&lt;/strong&gt; Simple and compatible with very old versions of Kubernetes where field ownership doesn&amp;rsquo;t exist&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;server-side-apply-the-modern-standard&#34;&gt;Server-Side Apply (The Modern Standard)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Logic:&lt;/strong&gt; &amp;ldquo;math&amp;rdquo; moves to the Kubernetes API server&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mechanism:&lt;/strong&gt; uses &lt;code&gt;managedFields&lt;/code&gt; in the object metadata&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Field ownership:&lt;/strong&gt; SSA introduces the concept of a &lt;em&gt;field manager&lt;/em&gt; — every field in a manifest is &amp;ldquo;owned&amp;rdquo; by the person or tool that applied it&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Conflict detection:&lt;/strong&gt; if two managers try to control the same field with different values, the API server blocks the change and throws a conflict error&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Win:&lt;/strong&gt; enables cooperative management — HPA can own the number of replicas while a human operator owns the image version&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;technical-deep-dive&#34;&gt;Technical Deep Dive&lt;/h2&gt;&#xA;&lt;p&gt;The secret to SSA is the &lt;code&gt;managedFields&lt;/code&gt; ledger. You can inspect it by running:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubernetes Notes</title>
+      <link>http://localhost:1313/tech/kubernetes-notes/</link>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/kubernetes-notes/</guid>
+      <description>&lt;p&gt;A running collection of notes from learning Kubernetes — meant for revision. Refer to the official documentation for deeper reading.&lt;/p&gt;&#xA;&lt;h2 id=&#34;manifests&#34;&gt;Manifests&lt;/h2&gt;&#xA;&lt;p&gt;The term &lt;em&gt;manifest&lt;/em&gt; is a generic term — like a shipping manifest — it specifies the details of a resource. Kubernetes reuses that concept throughout.&lt;/p&gt;&#xA;&lt;h2 id=&#34;kubectl-top-nodes&#34;&gt;kubectl top nodes&lt;/h2&gt;&#xA;&lt;p&gt;For this to work, you need to install the metrics server. The easiest way is to download the manifest from GitHub and apply it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Can SSL/TLS Be Used Interchangeably?</title>
+      <link>http://localhost:1313/tech/ssl-vs-tls/</link>
+      <pubDate>Fri, 20 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/ssl-vs-tls/</guid>
+      <description>&lt;p&gt;Man, it totally confused me! Let&amp;rsquo;s dig into this and check out the world of HTTPS communication.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;SSL (Secure Sockets Layer)&lt;/strong&gt; — an encryption-based internet security protocol. In simple terms, it defines a way to encrypt data at the source (client) and decrypt it at the destination (server). It&amp;rsquo;s the predecessor to modern TLS.&lt;/p&gt;&#xA;&lt;p&gt;To provide high security, data is encrypted at the source before being sent through the network — to avoid &amp;ldquo;Man in the Middle&amp;rdquo; attacks. But then, how do the server and client agree on which algorithm to use and what the secret key should be? If those keys are passed in plain text, someone can use them to decrypt the content and tamper with the whole communication.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Telnet vs SSH</title>
+      <link>http://localhost:1313/tech/telnet-vs-ssh/</link>
+      <pubDate>Sun, 15 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/telnet-vs-ssh/</guid>
+      <description>&lt;p&gt;When I was working at a small startup back in the day, there wouldn&amp;rsquo;t always be enough subject matter experts (SMEs) to solve problems due to small dev teams. In most cases, the startup required the engineering manager to be highly technical.&lt;/p&gt;&#xA;&lt;p&gt;Back then, we were manually deploying by building the Rust web server on the EC2 instance and restarting the application server for non-prod environments.&lt;/p&gt;&#xA;&lt;p&gt;Once, there was an issue where we were not able to SSH into the machine, and my manager quickly joined the call and fired a Telnet command first to check the connectivity. I couldn&amp;rsquo;t understand why he preferred Telnet over SSH — maybe it was just what he was familiar with, I thought.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Object Storage is All You Need: Justin Cormack</title>
+      <link>http://localhost:1313/tech/object-storage-is-all-you-need/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/object-storage-is-all-you-need/</guid>
+      <description>&lt;p&gt;A summary of one of the standout talks from KubeCon by Justin Cormack, CTO of Docker: &lt;em&gt;&amp;ldquo;Object Storage is All You Need.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;Amazon S3 has been an excellent primitive on the object storage front. As Jeff Bezos put it, it truly is the &amp;ldquo;malloc for the internet.&amp;rdquo; But what exactly is an object store?&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-an-object-store&#34;&gt;What is an Object Store?&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A key-value (KV) store powered by HTTP APIs&lt;/li&gt;&#xA;&lt;li&gt;Allows listing functionality to some extent&lt;/li&gt;&#xA;&lt;li&gt;Objects can only be updated as a whole, not in parts&lt;/li&gt;&#xA;&lt;li&gt;Essentially a minimal, non-POSIX filesystem&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The &amp;ldquo;non-POSIX&amp;rdquo; part is particularly important — let&amp;rsquo;s dig into why.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Living Ahead of Time: Daylight Savings and Beyond</title>
+      <link>http://localhost:1313/tech/daylight-savings-and-totp/</link>
+      <pubDate>Wed, 27 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/daylight-savings-and-totp/</guid>
+      <description>&lt;p&gt;Once daylight savings ended on November 3, 2024, I wanted to fix my sleep schedule — so I decided not to move back the analog clock in my house. The world is mostly digital though, so I manually adjusted the time on my phone and digital watch to not respect the time change. In other words, my clock was running 1 hour ahead of the true time in my region.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Understanding MySQL Server Time Zone Support</title>
+      <link>http://localhost:1313/tech/mysql-timezone-support/</link>
+      <pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/mysql-timezone-support/</guid>
+      <description>&lt;p&gt;MySQL has two column types for storing date and time: &lt;code&gt;DATETIME&lt;/code&gt; and &lt;code&gt;TIMESTAMP&lt;/code&gt;. They look similar on the surface but behave very differently when it comes to timezone handling.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;DATETIME&lt;/code&gt;&lt;/strong&gt; — stores the value as-is, with no timezone conversion on read&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;TIMESTAMP&lt;/code&gt;&lt;/strong&gt; — always stores in UTC internally, converts to system TZ on read&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;when-the-datetime-string-has-timezone-information&#34;&gt;When the Datetime String HAS Timezone Information&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/datetime-having-timezone.webp&#34; alt=&#34;has-timezone!&#34;&gt;&#xA;Take this example: &lt;code&gt;2024-10-22 22:47 -03:00&lt;/code&gt; (Oct 22, 2024 10:47 PM UTC-3)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Database Sharding and Partitioning</title>
+      <link>http://localhost:1313/tech/database-sharding-and-partitioning/</link>
+      <pubDate>Mon, 21 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/database-sharding-and-partitioning/</guid>
+      <description>&lt;h2 id=&#34;what-is-a-database-server&#34;&gt;What is a Database Server?&lt;/h2&gt;&#xA;&lt;p&gt;A DB server is just a database process (&lt;code&gt;mysqld&lt;/code&gt;, &lt;code&gt;mongod&lt;/code&gt;) running in an EC2 instance. It exposes a port through which outside requests can communicate — default 3306 for MySQL, configurable at installation.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;code&gt;d&lt;/code&gt; in &lt;code&gt;mysqld&lt;/code&gt; signifies it&amp;rsquo;s a &lt;strong&gt;daemon process&lt;/strong&gt; — it keeps running in the background of a specific instance.&lt;/p&gt;&#xA;&lt;h2 id=&#34;vertical-scaling&#34;&gt;Vertical Scaling&lt;/h2&gt;&#xA;&lt;p&gt;Increasing the RAM and disk of the EC2 instance the DB server resides on. No change to the &lt;code&gt;mysqld&lt;/code&gt; process itself.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>REST vs GraphQL</title>
+      <link>http://localhost:1313/tech/rest-vs-graphql/</link>
+      <pubDate>Sat, 12 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/rest-vs-graphql/</guid>
+      <description>&lt;p&gt;The main difference between them is how data is sent to the client.&lt;/p&gt;&#xA;&lt;h2 id=&#34;rest-architecture&#34;&gt;REST Architecture&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The client makes an HTTP request and the data is sent as an HTTP response.&lt;/li&gt;&#xA;&lt;li&gt;The structure of the request object is defined on the server.&lt;/li&gt;&#xA;&lt;li&gt;REST requires sending multiple API requests to fetch data from multiple sources.&lt;/li&gt;&#xA;&lt;li&gt;The problem of over/under fetching is solved by fetching resources as per the views present in the app. This makes the system tightly coupled.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;graphql&#34;&gt;GraphQL&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The client can control all the data it needs from the server.&lt;/li&gt;&#xA;&lt;li&gt;In other words, the client doesn&amp;rsquo;t get affected by under/over fetching or n+1 request problems — improves performance and reduces network bandwidth.&lt;/li&gt;&#xA;&lt;li&gt;In GraphQL, the request object is defined by the client.&lt;/li&gt;&#xA;&lt;li&gt;GraphQL simplifies data aggregation from multiple sources in a single API call.&lt;/li&gt;&#xA;&lt;li&gt;The resources are not exposed as per the views present in the app.&lt;/li&gt;&#xA;&lt;li&gt;GraphQL is an alternative to REST, not a replacement. Filtration logic can be implemented based on request parameters in REST as well.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;graphql-performance-issues&#34;&gt;GraphQL Performance Issues&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The user can&amp;rsquo;t run any query they want — the API must be well-designed using GraphQL domain language.&lt;/li&gt;&#xA;&lt;li&gt;Accessing multiple resources in a single API call might lead to deeply nested queries, potentially taking down a whole server.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devops on The Global Journal by Sitesh</title>
+    <link>http://localhost:1313/tags/devops/</link>
+    <description>Recent content in Devops on The Global Journal by Sitesh</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The &#34;apply&#34; Evolution in Kubernetes</title>
+      <link>http://localhost:1313/tech/kubernetes-apply-evolution/</link>
+      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/kubernetes-apply-evolution/</guid>
+      <description>&lt;p&gt;In Kubernetes, &lt;code&gt;kubectl apply&lt;/code&gt; is the bridge between &lt;strong&gt;desired state&lt;/strong&gt; (the YAML file) and &lt;strong&gt;live state&lt;/strong&gt; (the cluster). The &amp;ldquo;apply&amp;rdquo; logic determines how the cluster calculates the difference between these two states and who is allowed to change what.&lt;/p&gt;&#xA;&lt;h2 id=&#34;client-side-apply-the-legacy-method&#34;&gt;Client-Side Apply (The Legacy Method)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Logic:&lt;/strong&gt; &amp;ldquo;math&amp;rdquo; happens on the client side — your local machine&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mechanism:&lt;/strong&gt; uses a &lt;code&gt;last-applied-configuration&lt;/code&gt; annotation stored on the object&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;3-way merge:&lt;/strong&gt; kubectl compares the local file, the live state, and the last applied annotation&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Flaw:&lt;/strong&gt; It&amp;rsquo;s a &amp;ldquo;last-writer wins&amp;rdquo; system — blindly applies any change proposed at the last minute as the final state&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Win:&lt;/strong&gt; Simple and compatible with very old versions of Kubernetes where field ownership doesn&amp;rsquo;t exist&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;server-side-apply-the-modern-standard&#34;&gt;Server-Side Apply (The Modern Standard)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Logic:&lt;/strong&gt; &amp;ldquo;math&amp;rdquo; moves to the Kubernetes API server&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mechanism:&lt;/strong&gt; uses &lt;code&gt;managedFields&lt;/code&gt; in the object metadata&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Field ownership:&lt;/strong&gt; SSA introduces the concept of a &lt;em&gt;field manager&lt;/em&gt; — every field in a manifest is &amp;ldquo;owned&amp;rdquo; by the person or tool that applied it&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Conflict detection:&lt;/strong&gt; if two managers try to control the same field with different values, the API server blocks the change and throws a conflict error&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Win:&lt;/strong&gt; enables cooperative management — HPA can own the number of replicas while a human operator owns the image version&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;technical-deep-dive&#34;&gt;Technical Deep Dive&lt;/h2&gt;&#xA;&lt;p&gt;The secret to SSA is the &lt;code&gt;managedFields&lt;/code&gt; ledger. You can inspect it by running:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubernetes Notes</title>
+      <link>http://localhost:1313/tech/kubernetes-notes/</link>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/kubernetes-notes/</guid>
+      <description>&lt;p&gt;A running collection of notes from learning Kubernetes — meant for revision. Refer to the official documentation for deeper reading.&lt;/p&gt;&#xA;&lt;h2 id=&#34;manifests&#34;&gt;Manifests&lt;/h2&gt;&#xA;&lt;p&gt;The term &lt;em&gt;manifest&lt;/em&gt; is a generic term — like a shipping manifest — it specifies the details of a resource. Kubernetes reuses that concept throughout.&lt;/p&gt;&#xA;&lt;h2 id=&#34;kubectl-top-nodes&#34;&gt;kubectl top nodes&lt;/h2&gt;&#xA;&lt;p&gt;For this to work, you need to install the metrics server. The easiest way is to download the manifest from GitHub and apply it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Telnet vs SSH</title>
+      <link>http://localhost:1313/tech/telnet-vs-ssh/</link>
+      <pubDate>Sun, 15 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tech/telnet-vs-ssh/</guid>
+      <description>&lt;p&gt;When I was working at a small startup back in the day, there wouldn&amp;rsquo;t always be enough subject matter experts (SMEs) to solve problems due to small dev teams. In most cases, the startup required the engineering manager to be highly technical.&lt;/p&gt;&#xA;&lt;p&gt;Back then, we were manually deploying by building the Rust web server on the EC2 instance and restarting the application server for non-prod environments.&lt;/p&gt;&#xA;&lt;p&gt;Once, there was an issue where we were not able to SSH into the machine, and my manager quickly joined the call and fired a Telnet command first to check the connectivity. I couldn&amp;rsquo;t understand why he preferred Telnet over SSH — maybe it was just what he was familiar with, I thought.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
