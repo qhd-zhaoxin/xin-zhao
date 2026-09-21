@@ -42,7 +42,7 @@ menu:
       weight: 9
 
 params:
-  footer: "&copy; [Sitesh Pattanaik](https://your-site.netlify.app) {Year}"
+  footer: "&copy; [Xin Zhao](https://your-site.netlify.app) {Year} | Designed by Sitesh Pattanaik"
 
 markup:
   highlight:
