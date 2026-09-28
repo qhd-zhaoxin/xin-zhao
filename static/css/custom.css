@@ -116,3 +116,12 @@ footer {
 
 /* ===== images ======= */
 .small-img { max-width: 650px; }
+
+/* Team page */
+.team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.team-card { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; }
+.team-card img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center 20%; }
+.team-card h3, .team-card p { margin: 12px 16px; }
+.alumni { grid-template-columns: repeat(3, 1fr); }
+.alumni img { aspect-ratio: 1; }
+@media (max-width: 600px) { .team-grid, .alumni { grid-template-columns: 1fr; } }
