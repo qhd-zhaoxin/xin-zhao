@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: qhd-zhaoxin/qhd-zhaoxin.github.io
+  repo: spattk/xin-zhao
   branch: main
 
 media_folder: "static/images"
