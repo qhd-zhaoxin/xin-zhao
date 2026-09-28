@@ -3,12 +3,6 @@ title: Software Engineering & Systems Engineering
 date: 2026-09-27T19:13:00.000-07:00
 author: testing
 ---
-## Testing
-
-Hello there, does it work?
-
-
-
 ## Empirical Software Engineering
 
 In his ICSE 2015 Keynote, Grady Booch said, "Software is the invisible writing that whispers the stories of possibility to our hardware." Software developers are "story makers and story tellers."
