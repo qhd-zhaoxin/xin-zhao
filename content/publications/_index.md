@@ -1,8 +1,10 @@
 ---
-title: "Publications"
+title: Publications
+date: 2026-09-27T18:19:00.000-07:00
+author: testing
 ---
 
-# Journals
+# Journals - (v2 testing)
 
 - Ana Carolina de Souza Mendes, Mason Adsero, Joshua Palicka, Nurulla Zholdoshov, and Xin Zhao, "AI-crafted narratives: an empirical study on generating interactive stories using generative pre-training transformers," Applied Intelligence 55, 1004 (2025), DOI: https://doi.org/10.1007/s10489-025-06833-3.
 
