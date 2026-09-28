@@ -1,7 +1,7 @@
 ---
 title: Home
 ---
-![xin-zhao-image](/images/screenshot-2026-06-18-at-4.08.29 pm.png)
+![xin-zhao-image](/images/bgimage.png)
 
 ## Xin Zhao, Ph.D
 
