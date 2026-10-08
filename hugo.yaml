@@ -1,4 +1,4 @@
-baseurl: "https://merry-kheer-74befa.netlify.app/"  # please update this to your actual URL
+baseurl: "https://xin-zhao.netlify.app/"  # please update this to your actual URL
 languageCode: "en-us"
 title: "Xin Zhao Website"
 theme: "hugo-xmin"
@@ -42,7 +42,7 @@ menu:
       weight: 9
 
 params:
-  footer: "&copy; [Xin Zhao](https://your-site.netlify.app) {Year}"
+  footer: "&copy; [Xin Zhao](https://xin-zhao.netlify.app) {Year}"
 
 markup:
   highlight:
