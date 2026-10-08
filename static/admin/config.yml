@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: spattk/xin-zhao
+  repo: qhd-zhaoxin/xin-zhao
   branch: main
   site_domain: xin-zhao.netlify.app
 
