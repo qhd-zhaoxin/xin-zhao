@@ -1,18 +1,14 @@
 ---
-title: Software Engineering & Systems Engineering
-date: 2026-09-27T19:13:00.000-07:00
-author: testing
+title: "Human-Centered Computing"
 ---
-## Empirical Software Engineering
 
+## Human and Organizational Factors in Software Engineering
 In his ICSE 2015 Keynote, Grady Booch said, "Software is the invisible writing that whispers the stories of possibility to our hardware." Software developers are "story makers and story tellers."
 Software engineering is essentially a human activity. Empirical Software Engineering could help us better understand this activity. One of my main research interests is to apply Empirical Software Engineering to help software professionals develop high-quality software artifacts in the process of product implementation.
 
-## Model-Based Systems Engineering
+## Empirical Studies of Artificial Intelligence
+Understanding artificial intelligence requires examining both its capabilities and the people who use it. My research applies empirical methods to study how professionals adopt AI, how people interpret AI-generated content, and what biases and assumptions appear in its outputs. Through these studies, I aim to help individuals and organizations make informed decisions about AI and use it responsibly, with attention to human judgment, fairness, and accountability.
 
-Systems engineering is a multi-disciplinary approach to design, realize, manage and operate a system, which consists of hardware, software, process and personnel. Engineers and scientists from dfferent domains often create domain-specifc software artifacts - systems models to describe phenomena in the process of system development. Systems models are frequently tied to external instrumentation and devices that coordinate experimentation and observation.
-My research focuses on the methodologies and tools that support systems modeling to equipt it with the capabilities that are found in software engineering environments and practice.
 
-## CS Education Research
-
-I am also interested in the CS Education for K-12. During my Ph.D., I had the opportunity to help to promote CS Education for K-12 in Alabama, particulay to underrepresented groups. I was part of the team members in CS 10K: The Tuskegee Partnership to Establish Computer Science Education in the Alabama Black Belt (NSF #1639971) and Pathways for Alabama Computer Science (Department of Education - Education Innovation and Research).
+## CS for K–12 Education
+Expanding access to computer science begins with supporting the educators who introduce it to students. My research examines how K–12 educators develop programming skills and AI literacy, what challenges they encounter, and how professional learning can support their classroom practice. Through this work, I aim to help educators build confidence and create meaningful computing opportunities for students, particularly in rural and under-resourced communities.
